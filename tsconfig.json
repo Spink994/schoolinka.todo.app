@@ -1,0 +1,56 @@
+{
+	"compilerOptions": {
+		"target": "ES2021",
+		"esModuleInterop": true,
+		"lib": [
+			"DOM",
+			"DOM.Iterable",
+			"ESNext",
+			"WebWorker"
+		],
+		"module": "ESNext",
+		"skipLibCheck": true,
+		"sourceMap": false, // let me view the ts files as the source in my debugger (chrome...vscode)
+		"declaration": true, // generate a dts file for each of my source files...help
+		"declarationMap": true,
+		/* Bundler mode */
+		"moduleResolution": "bundler",
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		/* Linting */
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [
+				"./src/*",
+				"./dist/*",
+				""
+			],
+			"components": [
+				"./src/components/*"
+			],
+			"assets": [
+				"./src/assets/*"
+			],
+			"pages": [
+				"./src/pages/*"
+			]
+		}
+	},
+	"include": [
+		"src",
+		"tailwind.config.js",
+		"webpack.config.js"
+	],
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
+}
