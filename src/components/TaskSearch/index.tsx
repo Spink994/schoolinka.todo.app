@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/redux/app/hooks';
 import { Todo } from '@/redux/features/todo/todo.types';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaMicrophone } from 'react-icons/fa';
 import TodoCard from '../TodoCard';
 import { useDebounce } from '@/hooks/useDebounce';
@@ -13,13 +13,15 @@ export default function TaskSearch() {
 	const [results, setResults] = useState<Todo[]>([]);
 	const [resultModalStateHidden, setResultsModalStateHidden] = useState(true);
 
+	const ref = useRef<HTMLDivElement>(null);
+
 	useStopScrolling({ isOpen: resultModalStateHidden });
 
 	const debounce = useDebounce(searchQuery, 300);
 
 	useEffect(() => {
 		const matchingResults = todos?.filter((todo) =>
-			todo?.title?.includes(debounce)
+			todo?.title?.toLowerCase()?.includes(debounce.toLowerCase())
 		);
 		setResults(matchingResults);
 
@@ -31,20 +33,27 @@ export default function TaskSearch() {
 			{/* Search result modal */}
 			{resultModalStateHidden ? null : (
 				<div
+					ref={ref}
 					aria-hidden={resultModalStateHidden}
-					className="fixed left-0 bottom-0 z-50 flex h-[95vh] w-screen items-end bg-black/20 backdrop-blur-sm transition-transform [&[aria-hidden='true']]:translate-y-[200vh] [@media(min-width:1020px)]:hidden"
+					onClick={(e) => {
+						if (e.target === ref.current) {
+							setResultsModalStateHidden(true);
+							setSearchQuery('');
+						}
+					}}
+					className="fixed bottom-0 left-0 z-50 flex h-[95vh] w-screen flex-col justify-end bg-black/20 backdrop-blur-sm transition-transform [&[aria-hidden='true']]:translate-y-[200vh] [@media(min-width:1020px)]:hidden"
 				>
 					<button
 						onClick={() => {
 							setResultsModalStateHidden(true);
 							setSearchQuery('');
 						}}
-						className="absolute right-4 top-12 flex h-6 w-6 items-center justify-center rounded-full bg-white "
+						className="mb-4 ml-auto mr-4 flex h-6 w-6 items-center justify-center rounded-full bg-white "
 					>
-						<GrFormClose className="absolute" />
+						<GrFormClose />
 					</button>
 
-					<div className="h-[80vh] w-full overflow-y-scroll rounded-t-3xl border bg-white p-4 pb-24">
+					<div className="h-[65vh] w-full overflow-y-scroll rounded-t-3xl border bg-white p-4 pb-24">
 						{results.length > 0 ? (
 							<div className="flex flex-col gap-4">
 								{results !== null &&
