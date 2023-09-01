@@ -38,17 +38,17 @@ export default function Calendar() {
 			</div>
 
 			{/* Today's date  */}
-			<div className="my-4 flex gap-3">
-				<span className="flex h-10 w-full items-center rounded-lg border px-3 text-sm">
+			<div className="my-4 grid grid-cols-1 gap-3 [@media(min-width:350px)]:grid-cols-3">
+				<span className="col-span-2 flex h-10 items-center rounded-lg border px-3 text-sm">
 					{months[today.month()]} {today.date()}, {today.year()}
 				</span>
 				<Button
 					onClick={() => {
 						setToday(currentDate);
 					}}
-					className="w-max rounded-lg border bg-transparent"
+					className="w-full justify-center rounded-lg border bg-transparent"
 				>
-					<span className="my-4 flex h-10 items-center  px-6 font-semibold text-gray-900">
+					<span className="my-4 flex h-10 items-center px-6 font-semibold text-gray-900">
 						Today
 					</span>
 				</Button>

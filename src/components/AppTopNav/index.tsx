@@ -75,7 +75,7 @@ const AppTopNav = () => {
 			{/* Mobile navbar */}
 			<div
 				aria-hidden={isHidden}
-				className="fixed left-0 top-0 z-[120] flex h-screen w-screen flex-col justify-between gap-y-6 overflow-auto bg-white p-6 pt-12 transition-transform [&[aria-hidden='true']]:translate-x-[120vw] [@media(min-width:1020px)]:hidden"
+				className="fixed left-0 top-0 z-[120] flex h-screen w-screen flex-col justify-between gap-y-6 overflow-auto bg-white p-6 pb-24 pt-12 transition-transform [&[aria-hidden='true']]:translate-x-[120vw] [@media(min-width:1020px)]:hidden"
 			>
 				<button
 					onClick={() => setIsHidden(true)}
@@ -117,7 +117,7 @@ const AppTopNav = () => {
 					{showCalendar && <Calendar />}
 				</div>
 
-				<div className="mt-6 flex h-max items-center gap-2">
+				<div className="flex items-center gap-2">
 					<img
 						src={ProfileImage}
 						alt="profile picture of a beautiful lady"
