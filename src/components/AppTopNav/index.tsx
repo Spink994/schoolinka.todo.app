@@ -30,7 +30,7 @@ const AppTopNav = () => {
 	);
 
 	return (
-		<header className="sticky top-0 z-[70] max-h-[72px] w-full border-b bg-white  py-4">
+		<header className="sticky top-0 z-[110] max-h-[72px] w-full border-b bg-white  py-4">
 			<div className="mx-auto flex max-w-[1440px] items-center justify-between px-[4%]">
 				{/* Title */}
 				<h5 className="text-primary-1 text-2xl font-bold">ToDo</h5>
